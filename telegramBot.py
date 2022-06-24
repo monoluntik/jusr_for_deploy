@@ -49,16 +49,15 @@ def with_puree(message: types.Message):
 
 def send_messsage():
     while True:
-        try:
-            driver = BasketballBet()
-            new_message = driver.get_live_matches()
-            driver.driver_.close()
-            new_message = 'None' if new_message == '' else new_message
-            users = sql.execute(f"SELECT * FROM users").fetchall()
-            for id in users:
-                dp.send_message(id[0], new_message)
-        except:
-            continue
+        driver = BasketballBet()
+        new_message = driver.get_live_matches()
+        driver.driver_.close()
+        new_message = 'None' if new_message == '' else new_message
+        users = sql.execute(f"SELECT * FROM users").fetchall()
+        for id in users:
+            dp.send_message(id[0], new_message)
+        sleep(60)
+
 
 def bot_work():
     try:
